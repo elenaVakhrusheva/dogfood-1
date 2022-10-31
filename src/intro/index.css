@@ -18,7 +18,22 @@ body {
 	box-shadow: 0 0 0 5px #000;
 	border-radius: 8px;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	font-size: 50px;
+	position: relative;
+}
+
+.card .like {
+	position: absolute;
+	font-size: 20px;
+	transform: rotate(-90deg);
+	top:4px;
+	right:4px;
+}
+
+.card h6 {
+	margin: 0;
+	font-size: 12px;
 }
