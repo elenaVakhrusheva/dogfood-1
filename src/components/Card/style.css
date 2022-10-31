@@ -4,6 +4,12 @@
   padding: 8px; */
   display: grid;
   gap: 10px;
+  padding: 10px;
+}
+
+.card:hover {
+  box-shadow: 0px 0 2px 0px rgb(0 0 0 / 50%);
+  border-radius: 7px;
 }
 
 .card__image{
@@ -12,21 +18,43 @@
   background: no-repeat center / contain;
 
 }
+
+.card__image:hover {
+    -webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+     transform:scale(1.25);
+       -webkit-transition: all 1s ease; /* Safari and Chrome */
+    -moz-transition: all 1s ease; /* Firefox */
+    -ms-transition: all 1s ease; /* IE 9 */
+    -o-transition: all 1s ease; /* Opera */
+    transition: all 1s ease;
+}
 .card__price{
   font-weight: 800;
 
 }
 .card__text{
-  font-style: 12px;
+  font-size: 12px;
 }
 .btn{
-  width: max-content;
-  border:none;
-  border-radius: 30px;
+  width: 100%;
+  border: 1px solid #ffe44d;
+  border-radius: 5px;
   height: max-content;
   padding: 8px 12px;
   font-weight: 700;
   background-color: #ffe44d;
   align-self: flex-end;
 
+}
+
+.btn:focus {
+  border: 1px solid #000;
+}
+
+.btn:active {
+    border: 1px solid #ccc;
+    background: #fff;
 }
