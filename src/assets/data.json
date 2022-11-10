@@ -11,7 +11,7 @@
 		"available": true,
 		"stock": 10,
 		"picture": "https://react-learning.ru/image-compressed/1.jpg",
-		"tags": ["new"]
+		"tags": ["new", "hit"]
 	},
 	{
 		"id": 2,

@@ -2,6 +2,7 @@ import React from "react";
 import reactDom from "react-dom";
 import "./index.css";
 
+
 class Card extends React.Component{
 	render() {
 		return (
