@@ -20,5 +20,6 @@
     <li>
         Запустить проект
         <div><code>npm start</code></div>
+        <div><code>yarn start</code></div>
     </li>
 </ol>
