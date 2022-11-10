@@ -6,17 +6,18 @@ import reactDom from "react-dom";
 import "./style.css";
 //import AppMUI from './components/AppMUI/app-mui';
 
-reactDom.render(
+
+ reactDom.render(
 	<App/>,
 	document.querySelector("#root")
 	
-);
+); 
 
-/* reactDom.render(
+ /* reactDom.render(
 	<AppMUI/>,
 	document.querySelector("#root")
 	
-); */
+);  */
 
 /* reactDom.render(
 	<AppAnt/>,
