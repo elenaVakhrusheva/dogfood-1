@@ -5,13 +5,19 @@ import reactDom from "react-dom";
 // import AppAnt from "./components/AppAnt/app-ant";
 import "./style.css";
 //import AppMUI from './components/AppMUI/app-mui';
-
+ import { ProductPage } from "./pages/ProductPage"
 
  reactDom.render(
-	<App/>,
+	<ProductPage/>,
 	document.querySelector("#root")
 	
 ); 
+
+/*  reactDom.render(
+	<App/>,
+	document.querySelector("#root")
+	
+); */ 
 
  /* reactDom.render(
 	<AppMUI/>,
