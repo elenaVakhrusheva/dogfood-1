@@ -7,9 +7,8 @@ import {isLiked} from "../../utils/product";
 
 
 const Card = ({name, price, _id, likes, discount,wight,description, pictures, tags, onProductLike, currentUser}) => {
-  const discount__price = Math.round(price - price*discount / 100);
-
-  const liked = isLiked(likes, currentUser._id)
+  const discount__price = calcDiscountPrice(price, discount);
+  const liked = isLiked(likes, currentUser?._id)
 
   function handleLikeClick() {
     onProductLike({_id, likes})

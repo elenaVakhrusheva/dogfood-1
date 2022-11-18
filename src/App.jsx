@@ -12,37 +12,47 @@ import Button from "./components/Button/button";
 import useDebounce from "./hooks/useDebounce.js"; 
 import api from './utils/api'
 import {isLiked} from "./utils/product";
-
+import Spinner from "./components/Spinner/Spinner"
 
 function App() {
   const [cards, setCards] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading]= useState(true);
   const debounceSearchQuery = useDebounce(searchQuery, 200);
 
   const handleRequest = () => {
     // const filterCards = cards.filter( item => item.name.toUpperCase().includes(searchQuery.toUpperCase()));
     // setCards(filterCards);
+    setIsLoading (true); // при поиске загружаем прелоадер
     api
       .search(debounceSearchQuery)
       .then((searchResult) => {
         setCards(searchResult);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(()=>{
+        setIsLoading(false); // если загрузка закончена, то выключи прелоадер
+      })
   };
 
   useEffect(() => {
+    setIsLoading (true);
+    // при загрузке карточек покажи прелоадер
     Promise.all([api.getProductList(), api.getUserInfo()])
       .then(([productsData, userData]) => {
         setCurrentUser(userData);
         setCards(productsData.products);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(()=>{
+        setIsLoading(false);// если загрузка карточек закончена, то выключи прелоадер
+      })
   }, []);
 
   useEffect(() => {
     handleRequest();
-    console.log("INPUT", debounceSearchQuery);
+    // console.log("INPUT", debounceSearchQuery);
   }, [debounceSearchQuery]);  
 
   const handleFormSubmit = (e) => {
@@ -76,7 +86,7 @@ function App() {
 
   return (
     <>
-      <Header user={currentUser} onUpdateUser={handleUpadateUser}>
+      <Header /* user={currentUser} onUpdateUser={handleUpadateUser} */>
         <>
           <Logo className="logo logo_header" href="/" />
           <Search onSubmit={handleFormSubmit} onInput={handleInputChange}/>
@@ -90,14 +100,10 @@ function App() {
       <Searchinfo searchCount={cards.length} searchText={searchQuery}/>
        <Sort/>
         <div className='content__cards'>
-
-        {
-            currentUser
-              ? <CardList goods={cards} onProductLike={handleproductLike} currentUser={currentUser}/>
-              : <p>Loading...</p>
-          }
-
-         {/* <CardList goods={cards} onProductLike={handleproductLike} currentUser={currentUser}/> */}
+        {isLoading 
+          ? <Spinner/>
+          : <CardList goods={cards} onProductLike={handleproductLike} currentUser={currentUser}/>
+        }
         </div>
       </main>
       <Footer/>

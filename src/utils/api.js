@@ -20,6 +20,13 @@ class Api {
         }).then(onResponce)
     }
 
+   getProductById(idProduct) {
+        return fetch(`${this._baseUrl}/products/${idProduct}`, {
+            headers: this._headers
+        }).then(onResponce)
+    }
+
+
     setUserInfo(dataUser) {
         return fetch(`${this._baseUrl}/users/me`, {
           method: 'PATCH',
