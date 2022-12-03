@@ -6,9 +6,8 @@
 	"scripts": {
 		"editorconfig": "editorconfig-checker",
 		"test": "npm run editorconfig",
-		"build:prod": "rimraf ./docs && webpack --mode production --config webpack.config.js",
-		"build:dev": "rimraf ./docs && webpack --mode development --config webpack.config.js",
-		"start": "webpack serve"
+		"start": "webpack serve",
+		"build": "gh-pages -d build"
 	},
 	"dependencies": {
 		"@ant-design/icons": "^4.7.0",
@@ -35,6 +34,7 @@
 		"classname": "^0.0.0",
 		"css-loader": "^6.6.0",
 		"editorconfig-checker": "^4.0.2",
+		"gh-pages": "^4.0.0",
 		"html-webpack-plugin": "^5.5.0",
 		"rimraf": "^3.0.2",
 		"sass-loader": "^12.6.0",
