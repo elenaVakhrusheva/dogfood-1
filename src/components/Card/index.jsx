@@ -4,7 +4,7 @@ import cn from 'classnames';
 import "./style.css";
 import {ReactComponent as Save} from "./save.svg"
 import {isLiked} from "../../utils/product";
-
+import { calcDiscountPrice} from "../../utils/product";
 
 const Card = ({name, price, _id, likes, discount,wight,description, pictures, tags, onProductLike, currentUser}) => {
   const discount__price = calcDiscountPrice(price, discount);

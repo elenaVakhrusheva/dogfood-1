@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from "react";
-import CardList from "./components/CardList/CardList";
+import React, { useEffect, useState, useCallback } from "react";
+/* import CardList from "./components/CardList/CardList"; */
 import Header from "./components/Header/Header";
 import Logo from "./components/Logo/Logo";
 import Search from "./components/Search/Search";
 import Searchinfo from "./components/SearchInfo/Searchinfo";
 import Footer from "./components/Footer/Footer";
-import Sort from "./components/Sort/Sort";
+/* import Sort from "./components/Sort/Sort"; */
 import "./style.css";
-import data from "./assets/data.json";
-import Button from "./components/Button/button";
+/* import data from "./assets/data.json";
+import Button from "./components/Button/button"; */
 import useDebounce from "./hooks/useDebounce.js"; 
 import api from './utils/api'
 import {isLiked} from "./utils/product";
-import Spinner from "./components/Spinner/Spinner"
+/* import Spinner from "./components/Spinner/Spinner" */
+import { CatalogPage } from "./pages/CatalogPage/catalogPage";
+import { ProductPage } from "./pages/ProductPage";
+import { Routes } from "react-router-dom";
+import { Route } from "@mui/icons-material";
+
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -21,20 +26,21 @@ function App() {
   const [isLoading, setIsLoading]= useState(true);
   const debounceSearchQuery = useDebounce(searchQuery, 200);
 
-  const handleRequest = () => {
-    // const filterCards = cards.filter( item => item.name.toUpperCase().includes(searchQuery.toUpperCase()));
-    // setCards(filterCards);
+    
+  const handleRequest = useCallback((searchQuery) => { 
     setIsLoading (true); // при поиске загружаем прелоадер
     api
-      .search(debounceSearchQuery)
+      .search(searchQuery)
       .then((searchResult) => {
-        setCards(searchResult);
+        console.log(searchResult);
       })
       .catch((err) => console.log(err))
       .finally(()=>{
         setIsLoading(false); // если загрузка закончена, то выключи прелоадер
       })
-  };
+  }, [])
+
+  
 
   useEffect(() => {
     setIsLoading (true);
@@ -89,7 +95,9 @@ function App() {
       <Header /* user={currentUser} onUpdateUser={handleUpadateUser} */>
         <>
           <Logo className="logo logo_header" href="/" />
-          <Search onSubmit={handleFormSubmit} onInput={handleInputChange}/>
+          <Search 
+            onSubmit={handleFormSubmit} 
+            onInput={handleInputChange}/>
         </>
       </Header>
       <main className='content wrapper container cards-container'>
@@ -98,13 +106,31 @@ function App() {
       <Button type="secondary">Подробнее</Button> */}
         
       <Searchinfo searchCount={cards.length} searchText={searchQuery}/>
-       <Sort/>
-        <div className='content__cards'>
-        {isLoading 
-          ? <Spinner/>
-          : <CardList goods={cards} onProductLike={handleproductLike} currentUser={currentUser}/>
-        }
-        </div>
+
+      <Routes>
+        <Route index element={
+          <CatalogPage 
+            isLoading={isLoading} 
+            cards={cards} 
+            handleproductLike={handleproductLike}
+            currentUser={currentUser}
+          />
+        }/>
+        <Route path='/product' element={
+          <ProductPage
+          currentUser={currentUser}
+          isLoading={isLoading}
+          />
+        }/>
+      </Routes>
+      
+ 
+        
+        
+        
+      
+
+       
       </main>
       <Footer/>
     </>

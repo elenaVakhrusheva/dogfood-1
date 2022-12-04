@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState }  from 'react';
 import "./style.css";
 import {ReactComponent as SearchIcon} from './ic-search.svg';
-import {ReactComponent as CloseIcon} from './ic-close-input.svg';
+import {ReactComponent as CloseIcon} from './ic-close-input.svg'; 
+
 
 
 function Search({onSubmit: propsOnSubmit, onInput}) {
