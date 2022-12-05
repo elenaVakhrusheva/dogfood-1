@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import cn from 'classnames';
 
 import "./style.css";
 import {ReactComponent as Save} from "./save.svg"
 import {isLiked} from "../../utils/product";
 import { calcDiscountPrice} from "../../utils/product";
+import { Link } from "react-router-dom";
+import { UserContext } from "../../Context/newContext";
 
-const Card = ({name, price, _id, likes, discount,wight,description, pictures, tags, onProductLike, currentUser}) => {
+const Card = ({name, price, _id, likes, discount,wight,description, pictures, tags}) => {
+
+  const {user:currentUser} = useContext(UserContext);
+  const {handleLike:onProductLike} = useContext(CardContext);
   const discount__price = calcDiscountPrice(price, discount);
   const liked = isLiked(likes, currentUser?._id)
 
@@ -26,7 +31,7 @@ const Card = ({name, price, _id, likes, discount,wight,description, pictures, ta
         </button>
       </div>
 
-      <a href="/product" className="card__link">
+      <Link to="/product" className="card__link">
         <img src={pictures} alt={description} className="card__img" />
         <div className="card__descript">
           <span className = {discount !==0 ? "card__price-old" : "card__price"}>{price}&nbsp;₽          </span>
@@ -37,7 +42,7 @@ const Card = ({name, price, _id, likes, discount,wight,description, pictures, ta
           <span className="card__wight">{wight}</span>
           <p className="card__name">{name}</p>
         </div>
-      </a>
+      </Link>
       <a href="#" className="card__cart btn btn_primary">В корзину</a>
     </div>
   )

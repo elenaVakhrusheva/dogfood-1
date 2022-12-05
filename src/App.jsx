@@ -15,9 +15,10 @@ import {isLiked} from "./utils/product";
 /* import Spinner from "./components/Spinner/Spinner" */
 import { CatalogPage } from "./pages/CatalogPage/catalogPage";
 import { ProductPage } from "./pages/ProductPage";
-import { Routes } from "react-router-dom";
+import { Routes, useNavigate } from "react-router-dom";
 import { Route } from "@mui/icons-material";
-
+import { UserContext } from "./Context/newContext";
+import { CardContext } from "./Context/cardContext";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -25,9 +26,10 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading]= useState(true);
   const debounceSearchQuery = useDebounce(searchQuery, 200);
-
+  const navigate = useNavigate();
+  const [theme, setTheme] = useState(themes.light);
     
-  const handleRequest = useCallback((searchQuery) => { 
+  const handleRequest = useCallback(() => { 
     setIsLoading (true); // при поиске загружаем прелоадер
     api
       .search(searchQuery)
@@ -38,7 +40,7 @@ function App() {
       .finally(()=>{
         setIsLoading(false); // если загрузка закончена, то выключи прелоадер
       })
-  }, [])
+  }, [searchQuery])
 
   
 
@@ -61,9 +63,12 @@ function App() {
     // console.log("INPUT", debounceSearchQuery);
   }, [debounceSearchQuery]);  
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    handleRequest();
+  const handleFormSubmit = (inputText) => {
+   /*  e.preventDefault(); */
+    // setIsLoading(true);
+    navigate('/');
+    setSearchQuery(inputText);
+    handleRequest( );
   };
 
   const handleInputChange = (inputValue) => {
@@ -77,63 +82,69 @@ function App() {
       })
   }
 
-  function handleproductLike(product) {
+  const handleProductLike = useCallback ((product) => {
     const liked = isLiked(product.likes, currentUser._id);
-    api.changeLikeProduct(product._id, liked)
-      .then((newCard)=>{
+    return api.changeLikeProduct(product._id, liked)
+      .then((updateCard)=>{
         const newProducts = cards.map(cardState => {
          /*  console.log("Карточка из стейта", cardState);
           console.log("Карточка с сервера", newCard); */
-          return cardState._id === newCard._id ? newCard : cardState 
+          return cardState._id === updateCard._id ? updateCard : cardState 
         })
-        setCards(newProducts)
+        setCards(newProducts);
+
+        return updateCard;
       })
+  }, [currentUser]  )
+
+  const toggleTheme = () => {
+    theme === themes.dark ? setTheme(themes.light) : setTheme(themes.dark);
   }
 
   return (
-    <>
-      <Header /* user={currentUser} onUpdateUser={handleUpadateUser} */>
-        <>
-          <Logo className="logo logo_header" href="/" />
-          <Search 
-            onSubmit={handleFormSubmit} 
-            onInput={handleInputChange}/>
-        </>
-      </Header>
-      <main className='content wrapper container cards-container'>
+    <ThemeContext.Provider value={{theme:themes.light, toggleTheme}}>
+      <UserContext.Provider value={{user:currentUser}}>
+        <CardContext.Provider value={{cards, handleLike:handleproductLike}}>
+          <Header /* user={currentUser} onUpdateUser={handleUpadateUser} */>
+            <>
+              <Logo className="logo logo_header" href="/" />
+              <Routes>
+                <Route path='/' element={
+                  <Search 
+                    onSubmit={handleFormSubmit} 
+                    onInput={handleInputChange}
+                  />
+                }/>
+              </Routes>
+            </>
+          </Header>
+          <main className='content wrapper container cards-container' style ={{backgroundColor:theme.background}}>
 
-      {/* <Button type="primary">Купить</Button>
-      <Button type="secondary">Подробнее</Button> */}
-        
-      <Searchinfo searchCount={cards.length} searchText={searchQuery}/>
+          {/* <Button type="primary">Купить</Button>
+          <Button type="secondary">Подробнее</Button> */}
+            
+          <Searchinfo searchCount={cards.length} searchText={searchQuery}/>
 
-      <Routes>
-        <Route index element={
-          <CatalogPage 
-            isLoading={isLoading} 
-            cards={cards} 
-            handleproductLike={handleproductLike}
-            currentUser={currentUser}
-          />
-        }/>
-        <Route path='/product' element={
-          <ProductPage
-          currentUser={currentUser}
-          isLoading={isLoading}
-          />
-        }/>
-      </Routes>
-      
- 
-        
-        
-        
-      
-
-       
-      </main>
-      <Footer/>
-    </>
+          <Routes>
+            <Route index element={
+              <CatalogPage 
+                isLoading={isLoading} 
+              />
+            }/>
+            <Route path='/product/:productId' element={
+              <ProductPage
+              //currentUser={currentUser}
+              isLoading={isLoading}
+              />
+            }/>
+            <Route path='*' element={NotFoundPage}/>
+          </Routes>
+          </main>
+        </CardContext.Provider>
+        <Footer/>
+      </UserContext.Provider>
+    </ThemeContext.Provider>
+   
   )
 }
 

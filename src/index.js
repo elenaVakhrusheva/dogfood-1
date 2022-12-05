@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./style.css";
 //import AppMUI from './components/AppMUI/app-mui';
 /*  import { ProductPage } from "./pages/ProductPage" */
+import 'regenerator-runtime/runtime'
 
 
 

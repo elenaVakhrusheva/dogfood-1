@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Sort } from "@mui/icons-material";
 import Search from "antd/lib/transfer/search";
 import Footer from "../components/Footer/Footer";
@@ -8,59 +8,44 @@ import Spinner from "../components/Spinner/Spinner";
 import api from "../utils/api";
 import { isLiked } from "../utils/product";
 import { Product } from "../components/Product/product";
+import { useParams } from "react-router-dom";
+import { NotFound } from "../components/NotFound/NotFound";
+import { UserContext } from "../Context/newContext";
+import { CardContext } from "../Context/cardContext";
 
-const ID_PRODUCT = '622c77e877d63f6e70967d22';
+// const ID_PRODUCT = '622c77e877d63f6e70967d22';
 
-export const ProductPage = ({currentUser,isLoading}) => {
-  /*  const [searchQuery, setSearchQuery] = useState(""); */
-/*   const [currentUser, setCurrentUser] = useState(null);
-  const [isLoading, setIsLoading]= useState(true); */
+export const ProductPage = ({isLoading}) => {
+  const {productId} = useParams();
   const [product, setProduct]= useState(null);
-  
-  /* const handleRequest = useCallback((searchQuery) => { 
-    setIsLoading (true); // при поиске загружаем прелоадер
-    api
-      .search(searchQuery)
-      .then((searchResult) => {
-        console.log(searchResult);
-      })
-      .catch((err) => console.log(err))
-      .finally(()=>{
-        setIsLoading(false); // если загрузка закончена, то выключи прелоадер
-      })
-  }, []) */
+  const [errorState, setErrorState]= useState(null);
 
-
-/*   const handleFormSubmit = (value) => {
-   setSearchQuery(value); 
-    handleRequest(value);
-  } */
-
+  const {handleLike} = useContext(CardContext);
+ 
   const handleProductLike = useCallback(
-    ()=>{
-    const liked = isLiked(product.likes, currentUser._id);
+    ()=>{ 
+      handleLike(product).then((updateProduct)=> {
+        setProduct(updateProduct); 
+    });
+    
+    /* const liked = isLiked(product.likes, currentUser._id);
     api.changeLikeProduct(product._id, liked)
-      .then((newProduct)=>{
-       /*  const newProducts = cards.map(cardState => {
-          console.log("Карточка из стейта", cardState);
-          console.log("Карточка с сервера", newCard); 
-          return cardState._id === newCard._id ? newCard : cardState 
-        }) */
-        setProduct(newProduct);
-      })
-  }, [product, currentUser] ) 
+      .then((newProduct)=>{ 
+        
+      }) */
+  }, [product, handleLike] )  
 
   
 
     useEffect(() => {
     //setIsLoading (true);
     // при загрузке карточек покажи прелоадер
-    Promise.all([api.getProductById(ID_PRODUCT), api.getUserInfo()])
-      .then(([productsData, userData]) => {
+    api.getProductById(productId)
+      .then(([productsData ]) => {
         /* setCurrentUser(userData); */
         setProduct(productsData);
       })
-      .catch((err) => console.log(err))
+      .catch(err => setErrorState(err))
      /*  .finally(()=>{
         setIsLoading(false);// если загрузка карточек закончена, то выключи прелоадер
       }) */
@@ -73,8 +58,9 @@ export const ProductPage = ({currentUser,isLoading}) => {
        <div className='content__cards'>
         {isLoading 
           ? <Spinner/>
-          : <Product {...product} currentUser={currentUser} onProductLike={handleProductLike}/>
+          : !errorState && <Product {...product} setProduct={setProduct}  onProductLike={handleProductLike} />
         }
+        {!isLoading && errorState && <NotFound/>}
         </div>
     </>
   )
