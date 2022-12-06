@@ -7,6 +7,7 @@ import {isLiked} from "../../utils/product";
 import { calcDiscountPrice} from "../../utils/product";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/newContext";
+import { CardContext } from "../../Context/cardContext";
 
 const Card = ({name, price, _id, likes, discount,wight,description, pictures, tags}) => {
 
@@ -31,7 +32,7 @@ const Card = ({name, price, _id, likes, discount,wight,description, pictures, ta
         </button>
       </div>
 
-      <Link to="/product" className="card__link">
+      <Link to={`/product/${_id}`} className="card__link">
         <img src={pictures} alt={description} className="card__img" />
         <div className="card__descript">
           <span className = {discount !==0 ? "card__price-old" : "card__price"}>{price}&nbsp;₽          </span>

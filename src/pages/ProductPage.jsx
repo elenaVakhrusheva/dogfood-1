@@ -41,7 +41,7 @@ export const ProductPage = ({isLoading}) => {
     //setIsLoading (true);
     // при загрузке карточек покажи прелоадер
     api.getProductById(productId)
-      .then(([productsData ]) => {
+      .then((productsData ) => {
         /* setCurrentUser(userData); */
         setProduct(productsData);
       })

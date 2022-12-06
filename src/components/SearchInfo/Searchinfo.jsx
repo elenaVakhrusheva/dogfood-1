@@ -1,5 +1,5 @@
- import React from 'react';
-import { CardContext } from '../../Context/cardContext';
+import React, { useContext } from "react";
+import { CardContext } from './../../Context/cardContext.js';
 import './style.css';
 
 const SeachInfo = ({searchText}) => {

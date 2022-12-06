@@ -17,12 +17,11 @@ import 'regenerator-runtime/runtime'
 	
 );  */
 
- reactDom.render(
-	<BrowserRouter>
-		<App/>,
-		document.querySelector("#root")
-	</BrowserRouter>
-); 
+reactDom.render((
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+), document.getElementById('root')) 
 
  /* reactDom.render(
 	<AppMUI/>,
