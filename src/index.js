@@ -9,7 +9,16 @@ import "./style.css";
 /*  import { ProductPage } from "./pages/ProductPage" */
 import 'regenerator-runtime/runtime'
 
-
+/*  reactDom.render(
+	<ProductPage/>,
+	document.querySelector("#root")
+	
+);  */
+reactDom.render((
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+), document.getElementById('root'))
 
 /*  reactDom.render(
 	<ProductPage/>,
