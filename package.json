@@ -7,7 +7,7 @@
     "editorconfig": "editorconfig-checker",
     "test": "npm run editorconfig",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+     "build": "react-scripts build",
     "deploy": "gh-pages -d build",
     "homepage": "./"
   },

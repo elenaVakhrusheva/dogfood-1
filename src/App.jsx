@@ -13,7 +13,7 @@ import useDebounce from "./hooks/useDebounce.js";
 import api from './utils/api'
 import {isLiked} from "./utils/product";
 /* import Spinner from "./components/Spinner/Spinner" */
-import { CatalogPage } from "./pages/CatalogPage/catalogPage";
+import { CatalogPage } from "./pages/CatalogPage/CatalogPage";
 import { ProductPage } from "./pages/ProductPage";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { UserContext } from "./Context/newContext";
