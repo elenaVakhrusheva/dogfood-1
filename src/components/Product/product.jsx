@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import s from "./index.module.css";
 import cn from "classnames";
 import { calcDiscountPrice, isLiked, createMarkup} from "../../utils/product";
 import {ReactComponent as Save} from "./img/save.svg";
 import truck from './img/truck.svg';
 import quality from './img/quality.svg';
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../Context/newContext";
 
-export const Product = ({onProductLike, pictures, likes=[], revievs, tags, name,price,discount,description, weight, _id, currentUser}) => {
-
+export const Product = ({ onProductLike, pictures, likes=[], revievs, tags, name,price,discount,description, weight, _id}) => {
+  const{user:currentUser, handleLike} = useContext(UserContext);
+   
+  const navigate = useNavigate();
   const discount__price = calcDiscountPrice(price, discount);
   const isLike = isLiked(likes, currentUser?._id)
   const descriptionHTML = createMarkup(description);
@@ -15,7 +19,7 @@ export const Product = ({onProductLike, pictures, likes=[], revievs, tags, name,
   return (
   <>
     <div>
-      <a href="#" className="button-back">Назад</a>
+      <a href="#" className="button-back" onClick={()=>navigate(-1)}>Назад</a>
       <h1 className={s.productTitle}>{name}</h1>
       <div>
         <span>Артикул</span>: <b>874158</b>

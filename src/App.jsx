@@ -15,10 +15,11 @@ import {isLiked} from "./utils/product";
 /* import Spinner from "./components/Spinner/Spinner" */
 import { CatalogPage } from "./pages/CatalogPage/catalogPage";
 import { ProductPage } from "./pages/ProductPage";
-import { Routes, useNavigate } from "react-router-dom";
-import { Route } from "@mui/icons-material";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { UserContext } from "./Context/newContext";
 import { CardContext } from "./Context/cardContext";
+import { themes, ThemeContext } from './Context/themeContext'
+import {NotFoundPage} from './pages/NotFoundPage/NotFoundPage'
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -104,7 +105,7 @@ function App() {
   return (
     <ThemeContext.Provider value={{theme:themes.light, toggleTheme}}>
       <UserContext.Provider value={{user:currentUser}}>
-        <CardContext.Provider value={{cards, handleLike:handleproductLike}}>
+         <CardContext.Provider value={{cards, handleLike: handleProductLike}}>
           <Header /* user={currentUser} onUpdateUser={handleUpadateUser} */>
             <>
               <Logo className="logo logo_header" href="/" />
@@ -137,7 +138,7 @@ function App() {
               isLoading={isLoading}
               />
             }/>
-            <Route path='*' element={NotFoundPage}/>
+            <Route path='*' element={<NotFoundPage />}/>
           </Routes>
           </main>
         </CardContext.Provider>
