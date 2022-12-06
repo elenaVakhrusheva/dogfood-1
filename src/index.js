@@ -26,11 +26,6 @@ reactDom.render((
 	
 );  */
 
-reactDom.render((
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-), document.getElementById('root')) 
 
  /* reactDom.render(
 	<AppMUI/>,
