@@ -7,11 +7,16 @@ import "./style.css";
 //import AppMUI from './components/AppMUI/app-mui';
  import { ProductPage } from "./pages/ProductPage"
 
- reactDom.render(
+/*  reactDom.render(
 	<ProductPage/>,
 	document.querySelector("#root")
 	
-); 
+);  */
+reactDom.render((
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+), document.getElementById('root'))
 
 /*  reactDom.render(
 	<App/>,
