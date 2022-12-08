@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.b49bd7a0.css",
-    "main.js": "/static/js/main.dab73626.js",
-    "static/media/logo.svg": "/static/media/logo.4f9d699de55eb25e196ecc4c87a15a5e.svg",
-    "static/media/quality.svg": "/static/media/quality.7b9fd0f10f78b411180bbc38090dfc53.svg",
-    "static/media/instagram.svg": "/static/media/instagram.54cbf40d1b69370b6a2ec029eefc269c.svg",
-    "static/media/vk.svg": "/static/media/vk.5a6b12bf142f67e2138c1e6c69952975.svg",
-    "static/media/viber.svg": "/static/media/viber.b4234cd18a8ffefb8ebb172506996cea.svg",
-    "static/media/whatsapp.svg": "/static/media/whatsapp.51cbd71440eaa90946070b8848c12129.svg",
-    "static/media/ic-notfound.svg": "/static/media/ic-notfound.d026fd15799f3faa1b0dbc24fd5a8b96.svg",
-    "static/media/save.svg": "/static/media/save.3df695c28c2a364a54a49bd354583cc7.svg",
-    "static/media/truck.svg": "/static/media/truck.00c48913b07d95788dbad6dc47399667.svg",
-    "static/media/ic-close-input.svg": "/static/media/ic-close-input.f01e03cf609912dcdf78b1a91e354837.svg",
-    "index.html": "/index.html",
-    "static/media/ic-search.svg": "/static/media/ic-search.296528dfccff6373f75e8f75d02e833a.svg",
-    "static/media/telegram.svg": "/static/media/telegram.95a5ca8a1ae0a13c18da2bca3f249bf5.svg",
-    "main.b49bd7a0.css.map": "/static/css/main.b49bd7a0.css.map",
-    "main.dab73626.js.map": "/static/js/main.dab73626.js.map"
+    "main.css": "./static/css/main.b49bd7a0.css",
+    "main.js": "./static/js/main.c9bf82fa.js",
+    "static/media/logo.svg": "./static/media/logo.4f9d699de55eb25e196ecc4c87a15a5e.svg",
+    "static/media/quality.svg": "./static/media/quality.7b9fd0f10f78b411180bbc38090dfc53.svg",
+    "static/media/instagram.svg": "./static/media/instagram.956b8b96f88dffb83538a98dacc779f4.svg",
+    "static/media/vk.svg": "./static/media/vk.17dd338e025bd3d972d5b8c5afff447c.svg",
+    "static/media/viber.svg": "./static/media/viber.e04cf485c3b4afa1bdf4bd2837c534c8.svg",
+    "static/media/whatsapp.svg": "./static/media/whatsapp.e2a2770f97570bcc0c8ec3d91542ebcb.svg",
+    "static/media/ic-notfound.svg": "./static/media/ic-notfound.d026fd15799f3faa1b0dbc24fd5a8b96.svg",
+    "static/media/save.svg": "./static/media/save.58a50e89fc097bf457a9ba2ca6a3ac52.svg",
+    "static/media/truck.svg": "./static/media/truck.00c48913b07d95788dbad6dc47399667.svg",
+    "static/media/ic-close-input.svg": "./static/media/ic-close-input.f01e03cf609912dcdf78b1a91e354837.svg",
+    "index.html": "./index.html",
+    "static/media/ic-search.svg": "./static/media/ic-search.296528dfccff6373f75e8f75d02e833a.svg",
+    "static/media/telegram.svg": "./static/media/telegram.0482cc32b8264da43460df72f2a03373.svg",
+    "main.b49bd7a0.css.map": "./static/css/main.b49bd7a0.css.map",
+    "main.c9bf82fa.js.map": "./static/js/main.c9bf82fa.js.map"
   },
   "entrypoints": [
     "static/css/main.b49bd7a0.css",
-    "static/js/main.dab73626.js"
+    "static/js/main.c9bf82fa.js"
   ]
 }
