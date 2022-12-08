@@ -9,7 +9,7 @@
     "start": "react-scripts start",
      "build": "react-scripts build",
     "deploy": "gh-pages -d build",
-    "homepage": "./dogfood-1/"
+    "homepage": "/"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
