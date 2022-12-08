@@ -8,7 +8,8 @@
     "test": "npm run editorconfig",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "gh-pages -d build",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build",
     "homepage": "https://elenavakhrusheva.github.io/dogfood-1/"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "antd": "^4.24.1",
     "classnames": "^2.3.2",
     "core-js": "^3.21.1",
+    "gh-pages": "2.2.0",
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -37,7 +39,6 @@
     "classname": "^0.0.0",
     "css-loader": "^6.6.0",
     "editorconfig-checker": "^4.0.2",
-    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "rimraf": "^3.0.2",
     "sass-loader": "^12.6.0",
