@@ -9,7 +9,7 @@
     "start": "react-scripts start",
      "build": "react-scripts build",
     "deploy": "gh-pages -d build",
-    "homepage": "https://elenavakhrusheva.github.io/dogfood-1/"
+    "homepage": "https://elenavakhrusheva.github.io/dogfood-1/build/"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
