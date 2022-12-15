@@ -11,15 +11,19 @@ import "./style.css";
 import Button from "./components/Button/button"; */
 import useDebounce from "./hooks/useDebounce.js"; 
 import api from './utils/api'
-import {isLiked} from "./utils/product";
-/* import Spinner from "./components/Spinner/Spinner" */
+import {isLiked} from "./utils/product"; 
 import { CatalogPage } from "./pages/CatalogPage/CatalogPage";
 import { ProductPage } from "./pages/ProductPage";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "./Context/newContext";
 import { CardContext } from "./Context/cardContext";
 import { themes, ThemeContext } from './Context/themeContext'
 import {NotFoundPage} from './pages/NotFoundPage/NotFoundPage'
+import { FaqPage } from "./pages/FaqPage/FaqPage"; 
+import { FavoritePage } from "./pages/FavoritePage/FavoritePage";
+import Form from './components/Form/Form';
+import RegistrationForm from './components/Form/RegistrationForm';
+import Modal from './components/Modal/Modal';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -27,17 +31,24 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading]= useState(true);
   const debounceSearchQuery = useDebounce(searchQuery, 200);
-  const navigate = useNavigate();
   const [theme, setTheme] = useState(themes.light);
-    
+  
+  const[favorites, setFavorites] = useState([]);
+  const [isOpenModalForm, setIsOpenModalForm] = useState(false)
+
+  const location = useLocation()
+  const backgroundLocation = location.state?.backgroundLocation;
+  const initialPath = location.state?.initialPath;
+  console.log('initialPath', initialPath);
+  const navigate = useNavigate();
   const handleRequest = useCallback(() => { 
     setIsLoading (true); // при поиске загружаем прелоадер
     api
       .search(searchQuery)
       .then((searchResult) => {
-        console.log(searchResult);
+        setCards(searchResult);
       })
-      .catch((err) => console.log(err))
+      .catch(err => console.log(err))
       .finally(()=>{
         setIsLoading(false); // если загрузка закончена, то выключи прелоадер
       })
@@ -52,8 +63,10 @@ function App() {
       .then(([productsData, userData]) => {
         setCurrentUser(userData);
         setCards(productsData.products);
+        const favoriteProduct = productsData.filter(item =>isLiked(item.likes, userData._id));
+        setFavorites(prevSate => favoriteProduct)
       })
-      .catch((err) => console.log(err))
+      .catch(err => console.log(err))
       .finally(()=>{
         setIsLoading(false);// если загрузка карточек закончена, то выключи прелоадер
       })
@@ -88,24 +101,27 @@ function App() {
     return api.changeLikeProduct(product._id, liked)
       .then((updateCard)=>{
         const newProducts = cards.map(cardState => {
-         /*  console.log("Карточка из стейта", cardState);
-          console.log("Карточка с сервера", newCard); */
           return cardState._id === updateCard._id ? updateCard : cardState 
         })
+
+        if (!liked){
+          setFavorites(prevState =>[...prevState, updateCard])
+        } else {
+          setFavorites(prevState =>prevState.filter(card => card._id !== updateCard._id))
+        }
+
         setCards(newProducts);
 
         return updateCard;
       })
-  }, [currentUser]  )
+  }, [currentUser, cards]  )
 
-  const toggleTheme = () => {
-    theme === themes.dark ? setTheme(themes.light) : setTheme(themes.dark);
-  }
+  
 
   return (
-    <ThemeContext.Provider value={{theme:themes.light, toggleTheme}}>
-      <UserContext.Provider value={{user:currentUser}}>
-         <CardContext.Provider value={{cards, handleLike: handleProductLike}}>
+      <UserContext.Provider value={{user:currentUser, isLoading}}>
+         <CardContext.Provider value={{cards, favorites, handleLike: handleProductLike}}>
+          <RegistrationForm/>
           <Header /* user={currentUser} onUpdateUser={handleUpadateUser} */>
             <>
               <Logo className="logo logo_header" href="/" />
@@ -124,13 +140,11 @@ function App() {
           {/* <Button type="primary">Купить</Button>
           <Button type="secondary">Подробнее</Button> */}
             
-          <Searchinfo searchCount={cards.length} searchText={searchQuery}/>
+          <Searchinfo  searchText={searchQuery}/>
 
-          <Routes>
+          <Routes location={(backgroundLocation && {...backgroundLocation, pathname: initialPath}) || location}>
             <Route index element={
-              <CatalogPage 
-                isLoading={isLoading} 
-              />
+              <CatalogPage />
             }/>
             <Route path='/product/:productId' element={
               <ProductPage
@@ -138,13 +152,46 @@ function App() {
               isLoading={isLoading}
               />
             }/>
+            <Route path='/faq' element = {<FaqPage/>}/>
+            <Route path='/favorites' element ={
+              <FavoritePage  />}/>
+            <Route path='/login' element={
+                <>
+                  Авторизация
+                  <Link to='/register'>Зарегистрироваться</Link>
+                </>
+              }/>
+              <Route path='/register' element={
+                <Modal>
+                  Регистрация
+                  <Link to='/login'>Войти</Link>
+                </Modal>
+              }/>
             <Route path='*' element={<NotFoundPage />}/>
           </Routes>
+          
+          {backgroundLocation && (
+              <Routes>
+                 <Route path='/login' element={
+                <Modal>
+                  Авторизация
+                  <Link to='/register' replace={true} state={{backgroundLocation: location, initialPath}}>Зарегистрироваться</Link>
+                </Modal>
+              }/>
+
+              <Route path='/register' element={
+                <Modal>
+                  Регистрация
+                  <Link to='/login' replace={true} state={{backgroundLocation: location, initialPath}}>Войти</Link>
+                </Modal>
+              }/>
+              </Routes>
+            )}
           </main>
+           <Footer />
         </CardContext.Provider>
-        <Footer/>
+     
       </UserContext.Provider>
-    </ThemeContext.Provider>
    
   )
 }

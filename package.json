@@ -8,8 +8,8 @@
     "test": "npm run editorconfig",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -25,6 +25,7 @@
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.40.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "styled-components": "^5.3.6"
@@ -59,5 +60,5 @@
       "last 1 safari version"
     ]
   },
-   "homepage": "./"
+  "homepage": "./"
 }

@@ -11,7 +11,7 @@ import { CardContext } from "../../Context/cardContext";
 
 const Card = ({name, price, _id, likes, discount,wight,description, pictures, tags}) => {
 
-  const {user:currentUser} = useContext(UserContext);
+  const {user:currentUser, isLoading} = useContext(UserContext);
   const {handleLike:onProductLike} = useContext(CardContext);
   const discount__price = calcDiscountPrice(price, discount);
   const liked = isLiked(likes, currentUser?._id)
@@ -21,16 +21,29 @@ const Card = ({name, price, _id, likes, discount,wight,description, pictures, ta
   }
 
   return (
-    <div className="card">
-      <div className="card__attribute card__attribute-flag">
-        {discount !==0 && <span className="card__discount"> {`-${discount}%`}</span>}
-        {tags && tags.map(tag => <span key={tag} className={cn('tag', {[`tag tag_type_${tag}`]:true})}>{tag}</span>)}
-      </div>
-      <div className="card__attribute card__attribute-like">
-        <button className={cn('like-img',{'like-img_is-active': liked})} onClick={handleLikeClick}>
-          <Save className="like-img"/>           
-        </button>
-      </div>
+    <>
+			{isLoading 
+				?	<ContentLoader 
+						speed={2}
+						width={186}
+						height={385}
+						viewBox="0 0 186 385"
+						backgroundColor="#f3f3f3"
+						foregroundColor="#ecebeb"
+					>
+						<path d="M 0 0 h 185.6 v 187 H 0 z M 0 203 h 186 v 14 H 0 z M 0 233 h 186 v 56 H 0 z M 0 305 h 186 v 24 H 0 z" /> 
+						<rect x="0" y="345" rx="20" ry="20" width="121" height="40" />
+					</ContentLoader>
+				:  <div className="card">
+						<div className="card__sticky card__sticky_type_top-left">
+							{discount !== 0 && <span className="card__discount">{`-${discount}%`}</span>}
+							{tags && tags.map(tag => <span key={tag} className={cn('tag', {[`tag_type_${tag}`]: true}, )}>{tag}</span>)}
+						</div>
+						<div className="card__sticky card__sticky_type_top-right">
+							<button className={cn('like-img', {'like-img_is-active': liked})} onClick={handleLikeClick}>
+								<Save className="like-img-icon"/>
+							</button>
+						</div>
 
       <Link to={`/product/${_id}`} className="card__link">
         <img src={pictures} alt={description} className="card__img" />
@@ -46,20 +59,8 @@ const Card = ({name, price, _id, likes, discount,wight,description, pictures, ta
       </Link>
       <a href="#" className="card__cart btn btn_primary">В корзину</a>
     </div>
-  )
+  }
+  </>
+)
 }
-/*const Card = ({text, price, img}) => {
-  const imgStyle = {
-    backgroundImage: `url(${img})`
-  };
-  return(
-    <div className="card">
-      <div className="card__image" style={imgStyle}></div>
-      <div className="card__price">{price}</div>
-      <div className="card__text">{text}</div>
-      <button className="btn">В корзину</button>
-    </div>
-  )
-}
-*/
 export default Card;

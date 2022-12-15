@@ -1,0 +1,21 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  padding: 5px;
+  margin: 5px 0;
+  display: block;
+}
+
+button {
+  padding: 5px;
+  margin: 5px 0;
+}
+
+.errorMessage {
+  text-align: end;
+  color: red;
+  font-size: 12px;
+}

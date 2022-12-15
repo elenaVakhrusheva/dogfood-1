@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import s from "./index.module.css";
 import cn from "classnames";
 import { calcDiscountPrice, isLiked, createMarkup} from "../../utils/product";
@@ -7,10 +7,12 @@ import truck from './img/truck.svg';
 import quality from './img/quality.svg';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/newContext";
+import { ContentHeader } from '../../components/ContentHeader/ContentHeader';
+import { Rating } from '../../components/Rating/Rating';
 
 export const Product = ({ onProductLike, pictures, likes=[], revievs, tags, name,price,discount,description, weight, _id}) => {
-  const{user:currentUser, handleLike} = useContext(UserContext);
-   
+  const{user:currentUser} = useContext(UserContext);
+  const [rating, setRating] = useState(3);
   const navigate = useNavigate();
   const discount__price = calcDiscountPrice(price, discount);
   const isLike = isLiked(likes, currentUser?._id)
@@ -18,13 +20,11 @@ export const Product = ({ onProductLike, pictures, likes=[], revievs, tags, name
 
   return (
   <>
-    <div>
-      <a href="#" className="button-back" onClick={()=>navigate(-1)}>Назад</a>
-      <h1 className={s.productTitle}>{name}</h1>
-      <div>
-        <span>Артикул</span>: <b>874158</b>
-      </div>
-    </div>
+    <ContentHeader title={name}>
+      <span>Артикул</span>:
+      <Rating rating={rating} setRating={setRating} isEditable/>
+    </ContentHeader>
+
     <div className={s.product}>
       <div className={s.imgWrapper}>
         <img src={pictures} alt={`Изображение ${name}`} />
@@ -32,7 +32,7 @@ export const Product = ({ onProductLike, pictures, likes=[], revievs, tags, name
       <div className={s.desc}>
         <span className={discount ? s.oldPrice : s.Price}>{price}&nbsp;р.</span>
 
-        {discount && <span className={cn(s.price, 'card__price_type_discount')}>{discount__price}&nbsp;р.</span>}
+        {discount !== 0 && <span className={cn(s.price, 'card__price_type_discount')}>{discount__price}&nbsp;р.</span>}
 
         <div className={s.btnWrap}>
           <div className={s.left}>
@@ -67,8 +67,8 @@ export const Product = ({ onProductLike, pictures, likes=[], revievs, tags, name
 
     <div className={s.box}>
       <h2 className={s.title}>Описание</h2>
-      {/* 	<p className={s.subtitle} dangerouslySetInnerHTML={createMarkupDescription()}>
-				</p> */}
+      <p className={s.subtitle} dangerouslySetInnerHTML={createMarkupDescription()}>
+				</p> 
       <h2 className={s.title}>Характеристики</h2>
     	<div className={s.grid}>
 					<div className={s.naming}>Вес</div>
