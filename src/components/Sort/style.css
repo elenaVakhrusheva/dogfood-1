@@ -21,4 +21,5 @@
 
 .sort__link:hover {
 	color: #1A1A1A;
+	cursor:pointer;
 }

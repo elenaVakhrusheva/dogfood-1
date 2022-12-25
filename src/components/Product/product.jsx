@@ -16,7 +16,7 @@ export const Product = ({ onProductLike, pictures, likes=[], revievs, tags, name
   const navigate = useNavigate();
   const discount__price = calcDiscountPrice(price, discount);
   const isLike = isLiked(likes, currentUser?._id)
-  const descriptionHTML = createMarkup(description);
+  const desctiptionHTML = createMarkup(description);
 
   return (
   <>
@@ -67,7 +67,7 @@ export const Product = ({ onProductLike, pictures, likes=[], revievs, tags, name
 
     <div className={s.box}>
       <h2 className={s.title}>Описание</h2>
-      <p className={s.subtitle} dangerouslySetInnerHTML={createMarkupDescription()}>
+      <p className={s.subtitle} dangerouslySetInnerHTML={desctiptionHTML}>
 				</p> 
       <h2 className={s.title}>Характеристики</h2>
     	<div className={s.grid}>
