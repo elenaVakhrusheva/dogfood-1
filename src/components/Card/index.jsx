@@ -8,6 +8,7 @@ import { calcDiscountPrice} from "../../utils/product";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/newContext";
 import { CardContext } from "../../Context/cardContext";
+import ContentLoader from "react-content-loader";
 
 const Card = ({name, price, _id, likes, discount,wight,description, pictures, tags}) => {
 

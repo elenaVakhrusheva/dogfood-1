@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-/* import CardList from "./components/CardList/CardList"; */
+ import CardList from "./components/CardList/CardList"; 
 import Header from "./components/Header/Header";
 import Logo from "./components/Logo/Logo";
 import Search from "./components/Search/Search";
@@ -21,7 +21,7 @@ import { themes, ThemeContext } from './Context/themeContext'
 import {NotFoundPage} from './pages/NotFoundPage/NotFoundPage'
 import { FaqPage } from "./pages/FaqPage/FaqPage"; 
 import { FavoritePage } from "./pages/FavoritePage/FavoritePage";
-import Form from './components/Form/Form';
+import Form from '././components/Form/Form';
 import RegistrationForm from './components/Form/RegistrationForm';
 import Modal from './components/Modal/Modal';
 
@@ -147,14 +147,11 @@ function App() {
               <CatalogPage />
             }/>
             <Route path='/product/:productId' element={
-              <ProductPage
-              //currentUser={currentUser}
-              isLoading={isLoading}
-              />
+              <ProductPage isLoading={isLoading}/>
             }/>
             <Route path='/faq' element = {<FaqPage/>}/>
             <Route path='/favorites' element ={
-              <FavoritePage  />}/>
+              <FavoritePage/>}/>
             <Route path='/login' element={
                 <>
                   Авторизация
