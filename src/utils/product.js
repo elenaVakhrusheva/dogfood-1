@@ -5,5 +5,5 @@ export const calcDiscountPrice= (price, discount) =>{
 }
 
 export const createMarkup = (textToHtml) => {
-  return {__text:textToHtml}
+  return {__html:textToHtml}
 }
