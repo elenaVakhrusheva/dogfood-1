@@ -15,7 +15,7 @@ import {isLiked} from "./utils/product";
 import { CatalogPage } from "./pages/CatalogPage/CatalogPage";
 import { ProductPage } from "./pages/ProductPage";
 import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "./Context/newContext";
+import { UserContext } from "./Context/userContext";
 import { CardContext } from "./Context/cardContext";
 import { themes, ThemeContext } from './Context/themeContext'
 import {NotFoundPage} from './pages/NotFoundPage/NotFoundPage'

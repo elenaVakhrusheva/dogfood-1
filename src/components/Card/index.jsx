@@ -6,7 +6,7 @@ import {ReactComponent as Save} from "./save.svg"
 import {isLiked} from "../../utils/product";
 import { calcDiscountPrice} from "../../utils/product";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../Context/newContext";
+import { UserContext } from "../../Context/userContext";
 import { CardContext } from "../../Context/cardContext";
 import ContentLoader from "react-content-loader";
 

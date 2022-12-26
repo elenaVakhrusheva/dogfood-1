@@ -5,6 +5,7 @@ import { EMAIL_REGEXP, PASSWORD_REGEXP, VALIDATE_CONFIG } from "../../utils/cont
 import Form from "../Form/Form";
 import { FormButton } from "../FormButton/FormButton";
 import { FormInput } from "../FormInput/FormInput";
+import s from "./index.module.css"
 
 export const Login = () => {
   
@@ -62,7 +63,7 @@ export const Login = () => {
 
       <p className="infoText link" onClick={handleClickResetButton}>Восстановить пароль</p>
       
-      <FormButton type="submit" color="yellow">Войти</FormButton>
+      <FormButton type="submit" color="yellow" className={s.enterLk}>Войти</FormButton>
       
       <FormButton color="white" type="button" onClick={handleClickRegistrationButton}>Регистрация</FormButton>
     

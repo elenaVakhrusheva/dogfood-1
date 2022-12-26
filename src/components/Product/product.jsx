@@ -11,7 +11,7 @@ import { ContentHeader } from '../../components/ContentHeader/ContentHeader';
 import { Rating } from '../../components/Rating/Rating';
 import { FormReview } from '../FormReview/FormReview';
 
-export const Product = ({ onProductLike, pictures, likes=[], revievs=[], tags, name,price,discount,description, weight, _id, setProduct}) => {
+export const Product = ({ onProductLike, pictures, likes=[], reviews=[], tags, name,price,discount,description, weight, _id, setProduct}) => {
   const user = useContext(UserContext);
  /*  const [rating, setRating] = useState(3);
   const navigate = useNavigate(); */
@@ -19,7 +19,7 @@ export const Product = ({ onProductLike, pictures, likes=[], revievs=[], tags, n
   const isLike = isLiked(likes, user?.user?._id)
   const desctiptionHTML = createMarkup(description);
 
-  const ratingCount = useMemo(() => Math.round(revievs.reduce((acc, r) => acc = acc + r.rating, 0)/revievs.length), [revievs])
+  const ratingCount = useMemo(() => Math.round(reviews.reduce((acc, r) => acc = acc + r.rating, 0)/reviews.length), [reviews])
 
   return (
   <>
@@ -27,7 +27,7 @@ export const Product = ({ onProductLike, pictures, likes=[], revievs=[], tags, n
       <div>
         <span>Артикул</span>: {_id}
         <Rating rating={ratingCount}/> 
-        <span>{revievs.length || "Нет"} отзывов</span>
+        <span>{reviews.length || "Нет"} отзывов</span>
       </div>      
     </ContentHeader>
 
@@ -92,7 +92,7 @@ export const Product = ({ onProductLike, pictures, likes=[], revievs=[], tags, n
 			</div>
     
     <ul>
-      {revievs.map(reviewData => 
+      {reviews.map(reviewData => 
         <li key = {reviewData._id}>{reviewData.text}
           <Rating rating = {reviewData.rating}/>
         </li>
