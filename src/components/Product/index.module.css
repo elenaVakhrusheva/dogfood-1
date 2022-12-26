@@ -28,6 +28,7 @@
 	max-width: 400px;
 	flex-shrink: 0;
 }
+ 
 
 .oldPrice {
 	font-size: 14px;
@@ -60,9 +61,8 @@
 
 .left {
 	border: 1px solid #cfd8dc;
-	background-color: #fff;
-	height: 48px;
-	border-radius: 100px;
+  background-color: #fff;
+  border-radius: 100px;
 }
 
 .plus,
@@ -74,6 +74,7 @@
 	width: 40px;
 	cursor: pointer;
 	font-size: 24px;
+	vertical-align: middle;
 }
 
 .num {

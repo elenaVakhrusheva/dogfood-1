@@ -20,7 +20,7 @@ function Header({children, user, onUpdateUser}) {
             <FavoriteIcon/>
             {favorites.length !== 0 && <span className={s.iconBubble}>{favorites.length}</span>}
           </Link>          
-          <Link to='/login' state={{backgroundLocation: location, initialPath: location.pathname}} >Войти</Link>
+          <Link to='/login' state={{backgroundLocation: location, initialPath: location.pathname}} className={s.enterLk} >Войти</Link>
         </div>
       </div>
     </div>

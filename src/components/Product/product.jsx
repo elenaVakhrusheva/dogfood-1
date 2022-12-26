@@ -35,8 +35,8 @@ export const Product = ({ onProductLike, pictures, likes=[], reviews=[], tags, n
       <div className={s.imgWrapper}>
         <img src={pictures} alt={`Изображение ${name}`} />
       </div>
-      <div className={s.desc}>
-        <span className={discount ? s.oldPrice : s.Price}>{price}&nbsp;р.</span>
+      <div className={s.desc}  >
+        <span className={discount ? s.oldPrice : s.Price }>{price}&nbsp;р.</span>
 
         {discount !== 0 && <span className={cn(s.price, 'card__price_type_discount')}>{discount__price}&nbsp;р.</span>}
 
