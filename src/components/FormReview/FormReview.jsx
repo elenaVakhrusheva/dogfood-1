@@ -6,6 +6,7 @@ import Form from "../Form/Form";
 import { FormButton } from "../FormButton/FormButton";
 import { FormInput } from "../FormInput/FormInput";
 import { Rating } from "../Rating/Rating"; 
+import s from './index.module.css';
 
 export const FormReview = ({ title = 'Отзыв о товаре', productId, setProduct}) => {
   const {register, handleSubmit, formState: {errors}} = useForm({mode:"onBlur"})
@@ -37,7 +38,7 @@ export const FormReview = ({ title = 'Отзыв о товаре', productId, se
       {errors?.email && <p className="errorMessage">
         {errors?.email?.message} </p>}
 
-      <FormButton type="submit" color="yellow">Отправить отзыв</FormButton>
+      <FormButton type="submit" color="yellow" className={s.btnReview}>Отправить отзыв</FormButton>
       
     </Form>
   )
