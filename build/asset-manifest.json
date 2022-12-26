@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.9b47da4d.css",
-    "main.js": "./static/js/main.78e3e188.js",
+    "main.css": "./static/css/main.bfe07ee9.css",
+    "main.js": "./static/js/main.5fc5b2c0.js",
     "static/media/logo.svg": "./static/media/logo.4f9d699de55eb25e196ecc4c87a15a5e.svg",
     "static/media/quality.svg": "./static/media/quality.7b9fd0f10f78b411180bbc38090dfc53.svg",
     "static/media/instagram.svg": "./static/media/instagram.956b8b96f88dffb83538a98dacc779f4.svg",
@@ -17,11 +17,11 @@
     "index.html": "./index.html",
     "static/media/ic-search.svg": "./static/media/ic-search.296528dfccff6373f75e8f75d02e833a.svg",
     "static/media/telegram.svg": "./static/media/telegram.0482cc32b8264da43460df72f2a03373.svg",
-    "main.9b47da4d.css.map": "./static/css/main.9b47da4d.css.map",
-    "main.78e3e188.js.map": "./static/js/main.78e3e188.js.map"
+    "main.bfe07ee9.css.map": "./static/css/main.bfe07ee9.css.map",
+    "main.5fc5b2c0.js.map": "./static/js/main.5fc5b2c0.js.map"
   },
   "entrypoints": [
-    "static/css/main.9b47da4d.css",
-    "static/js/main.78e3e188.js"
+    "static/css/main.bfe07ee9.css",
+    "static/js/main.5fc5b2c0.js"
   ]
 }
