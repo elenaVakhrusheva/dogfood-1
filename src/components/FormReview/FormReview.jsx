@@ -10,7 +10,7 @@ import { Rating } from "../Rating/Rating";
 export const FormReview = ({ title = 'Отзыв о товаре', productId, setProduct}) => {
   const {register, handleSubmit, formState: {errors}} = useForm({mode:"onBlur"})
 
-  const [ratingClasses, setRating] = useState(1)
+  const [rating, setRating] = useState(1)
 
   const sendReviewProduct= (data) => {
     api.createReviewProduct(productId, {...data, rating})
@@ -29,7 +29,7 @@ export const FormReview = ({ title = 'Отзыв о товаре', productId, se
     <Form title = {title} handleFormSubmit = {handleSubmit(sendReviewProduct)}>
       <Rating rating = {rating} isEditable setRating = {setRating} />
 
-      <FormInput {...textReview} 
+      <FormInput {...textRewiew} 
         id="text"
         typeinput ="textarea"
         placeholder="Напишите текст отзыва"/>

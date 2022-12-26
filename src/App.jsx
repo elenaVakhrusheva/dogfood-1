@@ -148,7 +148,7 @@ function App() {
               </Routes>
             </>
           </Header>
-          <main className='content wrapper container cards-container' style ={{backgroundColor:theme.background}}>
+          <main className='content container cards-container' style ={{backgroundColor:theme.background}}>
 
           {/* <Button type="primary">Купить</Button>
           <Button type="secondary">Подробнее</Button> */}
