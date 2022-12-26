@@ -4,7 +4,7 @@ import CardList from "../../components/CardList/CardList";
 //import Spinner from "../../components/Spinner/Spinner";
 import { CardContext } from "../../Context/cardContext";
 
-const tabs = [
+ const tabs = [
 	{
 	  id: "cheap",
 	  title: "Сначала дешёвые",
@@ -23,11 +23,13 @@ export const CatalogPage = () => {
   const {cards} = useContext(CardContext); 
   return (
     <>
+		
       <Sort tabs={tabs}/>
         <div className='content__cards'>
           {/* <Spinner/> */}
            <CardList cards={cards}/>          
         </div>
+		
     </>
   )
 }

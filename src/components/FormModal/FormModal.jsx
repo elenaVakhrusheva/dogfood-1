@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Form from "../Form/form";
+import Form from "../Form/Form";
 
 export const FromModal = () => {
-  const [modalType, setModalType] = useState();
+  const [modalType, setModalType] = useState('login');
     if(modalType === 'registration') {
       return (
         <Form

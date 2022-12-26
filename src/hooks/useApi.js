@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useApi = (handler) => {
+  
   const [data,setData] = useState(null);
   const[loading, setLoading] = useState(true);
   const[error, setError] = useState(null);

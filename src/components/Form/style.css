@@ -19,3 +19,17 @@ button {
   color: red;
   font-size: 12px;
 }
+
+.infoText {
+    color: #7B8E98;
+    margin: 20px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 14px;
+  }
+  
+.link{
+    cursor: pointer;
+    text-align: right;
+  }

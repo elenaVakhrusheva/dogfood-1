@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import Card from "../Card/index";
-  import { CardContext } from '../../Context/cardContext';
+import { CardContext } from '../../Context/cardContext';
 import { UserContext } from '../../Context/userContext';
 import { NotFound } from '../NotFound/NotFound';
 

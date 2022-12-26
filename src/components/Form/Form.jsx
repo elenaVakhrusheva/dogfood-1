@@ -1,8 +1,18 @@
  
 import React, { useState } from "react";  
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
+import s from './index.module.css';
 import './style.css';
 
+function Form({title, handleFormSubmit, children}) {
+  return(
+    <form className={s.form} onSubmit={handleFormSubmit}>
+      <h1 className={s.title}>{title}</h1>
+      {children}
+    </form>
+  )
+}
+/* 
 function Form({title, formType, button, input, infoText, infoTextHeader, changeType, redirect}) {
     const {register, handleSubmit, formState: { errors }} = useForm({mode: "onBlur"})
 
@@ -54,8 +64,8 @@ function Form({title, formType, button, input, infoText, infoTextHeader, changeT
                 onChange={handleChange} 
             />
             <button>Отправить</button>
-        </form>
+        </form> 
     );
-};
+}; */
 
 export default Form;

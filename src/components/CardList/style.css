@@ -1,8 +1,9 @@
 .cards {
-	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 16px;
+	grid-gap: 16px;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(4,1fr);
+    width: 100%;
 }
 
 @media (max-width: 880px) {

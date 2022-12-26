@@ -21,9 +21,13 @@ import { themes, ThemeContext } from './Context/themeContext'
 import {NotFoundPage} from './pages/NotFoundPage/NotFoundPage'
 import { FaqPage } from "./pages/FaqPage/FaqPage"; 
 import { FavoritePage } from "./pages/FavoritePage/FavoritePage";
-import Form from '././components/Form/Form';
+import Form from './components/Form/Form';
 import RegistrationForm from './components/Form/RegistrationForm';
 import Modal from './components/Modal/Modal';
+import { FromModal } from './components/FormModal/FormModal';
+import { Register } from './components/Register/Register';
+import { Login } from './components/Login/Login';
+import { ResetPassword } from './components/ResetPassword/ResetPassword';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -34,9 +38,10 @@ function App() {
   const [theme, setTheme] = useState(themes.light);
   
   const[favorites, setFavorites] = useState([]);
-  const [isOpenModalForm, setIsOpenModalForm] = useState(false)
+  const [currentSort, setCurrentSort] = useState("");
+  const [isOpenModalForm, setIsOpenModalForm] = useState(false);
 
-  const location = useLocation()
+  const location = useLocation();
   const backgroundLocation = location.state?.backgroundLocation;
   const initialPath = location.state?.initialPath;
   console.log('initialPath', initialPath);
@@ -116,12 +121,20 @@ function App() {
       })
   }, [currentUser, cards]  )
 
-  
+  const sortedData = (currentSort) => {
+    console.log(currentSort);
+    switch (currentSort) {
+      case 'low': setCards(cards.sort((a, b) => b.price - a.price)); break;
+      case 'cheap': setCards(cards.sort((a, b) => a.price - b.price)); break;
+      case 'sale': setCards(cards.sort((a, b) => b.discount - a.discount)); break;
+      default: setCards(cards.sort((a, b) => a.price - b.price));
+    }
+  }
 
   return (
       <UserContext.Provider value={{user:currentUser, isLoading}}>
-         <CardContext.Provider value={{cards, favorites, handleLike: handleProductLike}}>
-          <RegistrationForm/>
+         <CardContext.Provider value={{cards, favorites, handleLike: handleProductLike, onSortData: sortedData, setCurrentSort }}>
+          {/* <RegistrationForm/> */}
           <Header /* user={currentUser} onUpdateUser={handleUpadateUser} */>
             <>
               <Logo className="logo logo_header" href="/" />
@@ -153,17 +166,14 @@ function App() {
             <Route path='/favorites' element ={
               <FavoritePage/>}/>
             <Route path='/login' element={
-                <>
-                  Авторизация
-                  <Link to='/register'>Зарегистрироваться</Link>
-                </>
+                <Login />
               }/>
               <Route path='/register' element={
-                <Modal>
-                  Регистрация
-                  <Link to='/login'>Войти</Link>
-                </Modal>
+                <Register />
               }/>
+              <Route path='/reset-password' element={
+              <ResetPassword />
+            } />
             <Route path='*' element={<NotFoundPage />}/>
           </Routes>
           
@@ -171,18 +181,24 @@ function App() {
               <Routes>
                  <Route path='/login' element={
                 <Modal>
-                  Авторизация
-                  <Link to='/register' replace={true} state={{backgroundLocation: location, initialPath}}>Зарегистрироваться</Link>
+                   <Login />
                 </Modal>
               }/>
 
               <Route path='/register' element={
                 <Modal>
-                  Регистрация
-                  <Link to='/login' replace={true} state={{backgroundLocation: location, initialPath}}>Войти</Link>
+                  <Register />
                 </Modal>
               }/>
-              </Routes>
+              
+              <Route path='/reset-password' element={
+                <Modal>
+                  <ResetPassword />
+                </Modal>
+              } />
+
+            </Routes>
+
             )}
           </main>
            <Footer />

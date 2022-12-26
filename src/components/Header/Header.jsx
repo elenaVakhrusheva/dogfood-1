@@ -5,10 +5,13 @@
 import { Link, useLocation } from "react-router-dom";
 import { CardContext } from "../../Context/cardContext";
 
+
 function Header({children, user, onUpdateUser}) { 
+
   const { favorites } = useContext(CardContext);
   const location = useLocation();
-  return (
+  
+  return(
   <header className={cn(s.header,'cover')}>
     <div className="container">
       <div className={s.header__wrapper}> {children}

@@ -1,11 +1,33 @@
 import React from 'react';
+import { useContext } from "react";
+import { CardContext } from "../../Context/cardContext";
 import "./style.css";
 import cn from 'classnames';
 
-const Sort = ({currentSort, tabs = [], onChangeSort}) => {
+const tabs = [
+    {
+      id: "cheap",
+      title: "Сначала дешёвые",
+    },
+    {
+      id: "low",
+      title: "Сначала дорогие",
+    },
+    {
+      id: "sale",
+      title: "По скидке",
+    },
+    ];
+
+
+const Sort = () => {
+    const {currentSort, setCurrentSort, onSortData} = useContext(CardContext);
+	
+	
 	const handleClick = (e, tab) => {
 		e.preventDefault(); 
-		onChangeSort(tab.id)
+		setCurrentSort(tab.id);
+		onSortData(tab.id)
 	}
 	return (
 		<div className="sort content__sort">

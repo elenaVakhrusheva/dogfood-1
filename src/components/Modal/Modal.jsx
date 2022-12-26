@@ -17,7 +17,9 @@ function Modal({children}) {
 
   return (
     <div className={cn('modal', {['active']: active})} onClick={onClose}>
+      
       <div className={cn('modal_content', {['active']: active})} onClick={e => e.stopPropagation()}>{children}</div>
+      
     </div>
     );
   };

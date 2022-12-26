@@ -8,14 +8,14 @@ import { ContentHeader } from "../../components/ContentHeader/ContentHeader";
 export const FavoritePage = () => {
    const {favorites} = useContext(CardContext); 
   return (
-    <>
+    <div className="container container_inner">
       <ContentHeader title="Избранное"/>
       <Sort/>
         <div className='content__cards'>
          {/*  <Spinner/> */}
           <CardList cards={favorites}/>
         </div>
-    </>
+    </div>
   )
 }
 

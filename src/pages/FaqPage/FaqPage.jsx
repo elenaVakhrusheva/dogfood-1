@@ -48,7 +48,7 @@ const dataFAQ = [
 
 export const FaqPage = () => {
   return ( 
-		<>
+		<div className="container container_inner">
 			<h1>Часто спрашивают</h1>
 			{
 				dataFAQ.map((data, index)=> 
@@ -56,7 +56,7 @@ export const FaqPage = () => {
 					{data.content}
 				</Accordion>)
 			}
-		</>
+		</div>
 	);
     
 } 
