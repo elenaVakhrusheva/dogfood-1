@@ -23,13 +23,13 @@ export const CatalogPage = () => {
   const {cards} = useContext(CardContext); 
   return (
     <>
-		
+		<div className="container container__inner">
       <Sort tabs={tabs}/>
         <div className='content__cards'>
           {/* <Spinner/> */}
            <CardList cards={cards}/>          
         </div>
-		
+			</div>
     </>
   )
 }

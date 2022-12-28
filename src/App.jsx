@@ -28,6 +28,8 @@ import { FromModal } from './components/FormModal/FormModal';
 import { Register } from './components/Register/Register';
 import { Login } from './components/Login/Login';
 import { ResetPassword } from './components/ResetPassword/ResetPassword';
+import { HomePage } from "./pages/HomePage/HomePage";
+
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -148,7 +150,7 @@ function App() {
               </Routes>
             </>
           </Header>
-          <main className='content container cards-container' style ={{backgroundColor:theme.background}}>
+          <main className='content cards-container' style ={{backgroundColor:theme.background}}>
 
           {/* <Button type="primary">Купить</Button>
           <Button type="secondary">Подробнее</Button> */}
@@ -157,8 +159,9 @@ function App() {
 
           <Routes location={(backgroundLocation && {...backgroundLocation, pathname: initialPath}) || location}>
             <Route index element={
-              <CatalogPage />
+              <HomePage />
             }/>
+            <Route path='/catalog' element = {<CatalogPage/>}/>
             <Route path='/product/:productId' element={
               <ProductPage isLoading={isLoading}/>
             }/>

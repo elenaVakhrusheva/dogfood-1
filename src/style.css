@@ -18,12 +18,15 @@ body {
 	margin: 0 auto;
 }
 
+.container__inner {
+  margin-top: 20px;
+}
+
 img {
 	max-width: 100%;
 }
 
 .content {
-	padding: 20px 0;
   flex:1;
 }
 
